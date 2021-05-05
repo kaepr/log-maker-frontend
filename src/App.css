@@ -105,7 +105,20 @@ body {
 
 /* LOG  */
 .log--container {
+  margin-top: 0.75em;
   width: 100%;
+}
+
+.log__success {
+  color: green;
+  font-weight: 700;
+}
+
+.log__wrapper {
+}
+
+.log__wrapper p {
+  padding: 0.125em 0;
 }
 
 .log--item {
@@ -123,4 +136,9 @@ body {
 .log--body {
   border-left: 2px solid black;
   padding: 0.75em 1em;
+}
+
+.form--submit.log__create {
+  text-decoration: none;
+  width: fit-content;
 }

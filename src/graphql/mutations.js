@@ -50,3 +50,29 @@ export const UPDATE_USER = gql`
     }
   }
 `;
+
+export const CREATE_USER = gql`
+  mutation CREATE_USER(
+    $fullname: String!
+    $password: String!
+    $confirmpassword: String!
+    $role: String!
+    $email: String!
+  ) {
+    register(
+      input: {
+        fullname: $fullname
+        password: $password
+        confirmpassword: $confirmpassword
+        email: $email
+        role: $role
+      }
+    ) {
+      id
+      fullname
+      email
+      role
+      createdAt
+    }
+  }
+`;

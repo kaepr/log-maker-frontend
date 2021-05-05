@@ -8,6 +8,7 @@ import Home from "./pages/Home/Home";
 import Logs from "./pages/Logs/Logs";
 import Admin from "./pages/Admin/Admin";
 import Login from "./pages/Login/Login";
+import CreateLog from "./pages/Logs/CreateLog";
 
 import UserRoute from "./components/Routes/UserRoute";
 import AdminRoute from "./components/Routes/AdminRoute";
@@ -40,6 +41,7 @@ function App() {
         <Route exact path="/" component={Home} />
         <Route exact path="/login" component={Login} />
         <UserRoute exact path="/logs" component={Logs} />
+        <UserRoute exact path="/createlog" component={CreateLog} />
         <AdminRoute exact path="/admin" component={Admin} />
       </Switch>
     </Router>

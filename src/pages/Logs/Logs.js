@@ -1,5 +1,6 @@
 import React from "react";
 import { useQuery } from "@apollo/client";
+import { Link } from "react-router-dom";
 import { useAtom } from "jotai";
 import PulseLoader from "react-spinners/PulseLoader";
 
@@ -24,12 +25,15 @@ const Logs = () => {
   }
 
   return (
-    <div className="container">
+    <div className="container log__wrapper">
       {loading ? (
         <PulseLoader />
       ) : (
         <>
           <h2>Logs</h2>
+          <Link to="/createlog" className="form--submit log__create">
+            Create Log
+          </Link>
           <p>Logs created by : {userData.fullname}</p>
           {data !== undefined ? (
             <>

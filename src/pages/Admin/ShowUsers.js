@@ -1,4 +1,4 @@
-const IndividualLog = ({ data }) => {
+const IndividualUser = ({ data }) => {
   return (
     <div className="log--item">
       <div className="log--phonenumber">{data.phoneNumber}</div>
@@ -7,18 +7,20 @@ const IndividualLog = ({ data }) => {
   );
 };
 
-const ShowLogs = ({ data }) => {
+const ShowUsers = ({ data }) => {
   if (data === null || data === undefined) {
-    return <div>No Logs</div>;
+    return <div>No Users</div>;
   }
+
+  console.log("data = ", data);
 
   return (
     <div className="log--container">
-      {data.map((value, index) => {
-        return <IndividualLog data={value} key={value.id} />;
+      {data.map((value) => {
+        return <IndividualUser data={value} key={value.id} />;
       })}
     </div>
   );
 };
 
-export default ShowLogs;
+export default ShowUsers;
