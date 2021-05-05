@@ -1,3 +1,9 @@
+:root {
+  --dark-grey: #182628;
+  --light-gray: #f2f2f2;
+  --light-green: #65ccb8;
+}
+
 body {
   min-height: 100vh;
   width: 100%;
@@ -8,12 +14,12 @@ body {
 
 /* NAVBAR */
 .navbar {
-  background: lightblue;
+  background: var(--light-green);
 }
 
 .navbar--list {
   list-style: none;
-  height: 80px;
+  height: 4em;
   max-width: 80%;
   margin: 0 auto;
   display: flex;
@@ -30,9 +36,12 @@ body {
 
 .navbar--link {
   display: inline-block;
-  background-color: brown;
+  background-color: var(--dark-grey);
+  border-radius: 3px;
   /* border: 2px blue solid; */
   padding: 0.5em 1em;
+  color: white;
+  font-weight: 700;
 }
 
 .navbar--link,
@@ -40,5 +49,14 @@ body {
 .navbar--link:focus,
 .navbar--link:active {
   text-decoration: none;
-  color: inherit;
+}
+
+/* LAYOUT */
+.container {
+  margin: 0 auto;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2em;
 }

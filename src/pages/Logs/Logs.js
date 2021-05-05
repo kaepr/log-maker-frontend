@@ -1,7 +1,11 @@
 import React from "react";
 
 const Logs = () => {
-  return <div>Logs</div>;
+  return (
+    <div className="container">
+      <h2>Logs</h2>
+    </div>
+  );
 };
 
 export default Logs;

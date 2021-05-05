@@ -3,32 +3,38 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import {
-  gql,
   ApolloProvider,
   ApolloClient,
   InMemoryCache,
+  createHttpLink,
 } from "@apollo/client";
 
-const client = new ApolloClient({
+import { setContext } from "@apollo/client/link/context";
+
+const httpLink = createHttpLink({
   uri: "http://localhost:5000/graphql",
-  cache: new InMemoryCache(),
 });
 
-// client
-//   .query({
-//     query: gql`
-//       query getLogs {
-//         getLogs {
-//           id
-//           body
-//           phoneNumber
-//           user
-//           createdAt
-//         }
-//       }
-//     `,
-//   })
-//   .then((result) => console.log(result));
+const temp =
+  "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwOTE5NmUzZjBlMzk5N2Y3ODBiY2FiMiIsImlhdCI6MTYyMDIxMDY0MiwiZXhwIjoxNjIwMjQ2NjQyfQ.23kpN3WWB0otlIxNNr8DuZEzxT6lp83rbb6ytta52NU";
+
+const authLink = setContext((_, { headers }) => {
+  // get the authentication token from local storage if it exists
+  const token = localStorage.getItem("token");
+  // return the headers to the context so httpLink can read them
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : "",
+      // authorization: temp,
+    },
+  };
+});
+
+const client = new ApolloClient({
+  link: authLink.concat(httpLink),
+  cache: new InMemoryCache(),
+});
 
 ReactDOM.render(
   <React.StrictMode>
