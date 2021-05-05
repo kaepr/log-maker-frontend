@@ -18,7 +18,7 @@ import { GET_CURRENT_USER } from "./graphql/queries";
 import "./App.css";
 
 function App() {
-  const [userData, setUser] = useAtom(user);
+  const [, setUser] = useAtom(user);
 
   const { data, loading, error } = useQuery(GET_CURRENT_USER);
 
@@ -28,10 +28,10 @@ function App() {
     }
   }, [data]);
 
-  console.log("data = ", data);
-  console.log("userData = ", userData);
-  console.log("loading = ", loading);
-  console.log("error = ", error);
+  // console.log("data = ", data);
+  // console.log("userData = ", userData);
+  // console.log("loading = ", loading);
+  // console.log("error = ", error);
 
   return (
     <Router>

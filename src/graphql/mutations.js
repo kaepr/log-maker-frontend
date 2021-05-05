@@ -12,3 +12,41 @@ export const LOGIN_USER = gql`
     }
   }
 `;
+
+export const CREATE_LOG = gql`
+  mutation CREATE_LOG($body: String!, $phoneNumber: String!) {
+    createLog(input: { body: $body, phoneNumber: $phoneNumber }) {
+      id
+      body
+      phoneNumber
+      user
+      createdAt
+    }
+  }
+`;
+
+export const UPDATE_USER = gql`
+  mutation UPDATE_USER(
+    $id: ID!
+    $fullname: String!
+    $role: String!
+    $email: String!
+    $password: String!
+  ) {
+    updateUser(
+      input: {
+        id: $id
+        fullname: $fullname
+        role: $role
+        password: $password
+        email: $email
+      }
+    ) {
+      id
+      fullname
+      role
+      createdAt
+      email
+    }
+  }
+`;

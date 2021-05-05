@@ -22,3 +22,15 @@ export const GET_CURRENT_USER_LOG = gql`
     }
   }
 `;
+
+export const GET_USERS = gql`
+  query GET_USERS {
+    getUsers {
+      id
+      fullname
+      role
+      createdAt
+      email
+    }
+  }
+`;

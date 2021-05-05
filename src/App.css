@@ -31,7 +31,6 @@ body {
   display: block;
   list-style: none;
   cursor: pointer;
-  /* border: 2px red solid; */
   margin: 0 0.5em;
 }
 
@@ -40,7 +39,6 @@ body {
   display: inline-block;
   background-color: var(--dark-grey);
   border-radius: 3px;
-  /* border: 2px blue solid; */
   padding: 0.5em 1em;
   color: white;
   font-weight: 700;
@@ -103,4 +101,26 @@ body {
 
 .form--submit:hover {
   transform: scale(1.05);
+}
+
+/* LOG  */
+.log--container {
+  width: 100%;
+}
+
+.log--item {
+  display: flex;
+  border: 2px solid black;
+  margin-bottom: 1em;
+}
+
+.log--phonenumber {
+  text-align: center;
+  margin: auto 0;
+  padding: 0.75em 1em;
+}
+
+.log--body {
+  border-left: 2px solid black;
+  padding: 0.75em 1em;
 }
