@@ -10,3 +10,15 @@ export const GET_CURRENT_USER = gql`
     }
   }
 `;
+
+export const GET_CURRENT_USER_LOG = gql`
+  query GET_CURRENT_USER_LOG {
+    getCurrentUserLogs {
+      id
+      body
+      phoneNumber
+      user
+      createdAt
+    }
+  }
+`;

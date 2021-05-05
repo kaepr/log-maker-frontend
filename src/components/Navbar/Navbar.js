@@ -1,8 +1,8 @@
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { useAtom } from "jotai";
 import { user } from "../../store/store";
 
-const Navbar = () => {
+const Navbar = (props) => {
   const [userData, setUserData] = useAtom(user);
 
   let isLogged = false;
@@ -14,6 +14,17 @@ const Navbar = () => {
     }
   }
 
+  const handleLogout = () => {
+    try {
+      setUserData(null);
+      localStorage.removeItem("token");
+      // props.history.push("/");
+      return <Redirect to="/" />;
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <nav className="navbar">
       <ul className="navbar--list">
@@ -22,11 +33,13 @@ const Navbar = () => {
             Home
           </Link>
         </li>
-        <li className="navbar--item">
-          <Link to="/login" className="navbar--link">
-            Login
-          </Link>
-        </li>
+        {!isLogged && (
+          <li className="navbar--item">
+            <Link to="/login" className="navbar--link">
+              Login
+            </Link>
+          </li>
+        )}
         {isLogged && (
           <li className="navbar--item">
             <Link to="/logs" className="navbar--link">
@@ -39,6 +52,11 @@ const Navbar = () => {
             <Link to="/admin" className="navbar--link">
               Admin
             </Link>
+          </li>
+        )}
+        {isLogged && (
+          <li className="navbar--item" onClick={handleLogout}>
+            <p className="navbar--link">Logout</p>
           </li>
         )}
       </ul>

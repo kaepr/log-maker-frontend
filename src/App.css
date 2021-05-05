@@ -30,11 +30,13 @@ body {
 .navbar--item {
   display: block;
   list-style: none;
+  cursor: pointer;
   /* border: 2px red solid; */
   margin: 0 0.5em;
 }
 
 .navbar--link {
+  text-decoration: none;
   display: inline-block;
   background-color: var(--dark-grey);
   border-radius: 3px;
@@ -44,11 +46,10 @@ body {
   font-weight: 700;
 }
 
-.navbar--link,
-.navbar--link:hover,
-.navbar--link:focus,
-.navbar--link:active {
+.navbar--link:hover {
   text-decoration: none;
+  background-color: var(--light-gray);
+  color: var(--dark-grey);
 }
 
 /* LAYOUT */
@@ -59,4 +60,47 @@ body {
   flex-direction: column;
   align-items: center;
   margin-top: 2em;
+}
+
+/* INPUT FORM */
+.form--container {
+  min-width: 50%;
+  margin: 1em;
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form--input {
+  border: none;
+  background: hsl(0 0% 93%);
+  border-radius: 0.25rem;
+  padding: 0.75rem 1rem;
+  margin: 0.5em;
+  width: 100%;
+}
+
+.form--error--msg {
+  display: inline-block;
+  font-weight: 600;
+  max-width: 100%;
+  color: red;
+}
+
+.form--submit {
+  width: 100%;
+  border: 2px whitesmoke solid;
+  border-radius: 5px;
+  background: var(--dark-grey);
+  padding: 0.75rem 1rem;
+  margin: 0.5em;
+  color: white;
+  font-weight: 700;
+  transform: scale(1);
+  transition: transform 0.5s ease-in-out;
+}
+
+.form--submit:hover {
+  transform: scale(1.05);
 }

@@ -9,6 +9,9 @@ import Logs from "./pages/Logs/Logs";
 import Admin from "./pages/Admin/Admin";
 import Login from "./pages/Login/Login";
 
+import UserRoute from "./components/Routes/UserRoute";
+import AdminRoute from "./components/Routes/AdminRoute";
+
 import { user } from "./store/store";
 import { GET_CURRENT_USER } from "./graphql/queries";
 
@@ -36,8 +39,8 @@ function App() {
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/login" component={Login} />
-        <Route exact path="/logs" component={Logs} />
-        <Route exact path="/admin" component={Admin} />
+        <UserRoute exact path="/logs" component={Logs} />
+        <AdminRoute exact path="/admin" component={Admin} />
       </Switch>
     </Router>
   );
