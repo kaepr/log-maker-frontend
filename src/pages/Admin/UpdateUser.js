@@ -16,9 +16,7 @@ const schema = yup.object().shape({
 });
 
 const UpdateUser = (data) => {
-  //   console.log("update data = ", data);
   const userDataProps = data.history.location.data.data;
-  console.log("update data = ", userDataProps);
 
   const [err, setErr] = useState("");
   const [msg, setMsg] = useState("");
@@ -59,18 +57,12 @@ const UpdateUser = (data) => {
               query: GET_USERS,
             });
 
-            console.log("user data = ", userData);
-            console.log("data = ", data);
             const index = userData.getUsers.findIndex(
               (elm) => elm.id === data.updateUser.id
             );
 
-            console.log("index = ", index);
-
             let tempArr = [...userData.getUsers];
             tempArr[index] = data.updateUser;
-
-            console.log(("temparr", tempArr));
 
             store.writeQuery({
               query: GET_USERS,
@@ -79,18 +71,12 @@ const UpdateUser = (data) => {
               },
             });
 
-            console.log("data = ", data);
             setMsg("User updated successfully");
           } catch (err) {
             console.log("err", err);
             setErr("User not updated successfully");
           }
         },
-        // refetchQueries: [
-        //   {
-        //     query: GET_USERS,
-        //   },
-        // ],
       });
     } catch (err) {
       reset();
@@ -104,8 +90,6 @@ const UpdateUser = (data) => {
       setErr("");
     }, 5000);
   }, [msg, err]);
-
-  console.log("create error = ", updateError);
 
   return (
     <div className="container">

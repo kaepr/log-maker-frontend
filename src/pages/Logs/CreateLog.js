@@ -18,6 +18,7 @@ const schema = yup.object().shape({
 const CreateLog = () => {
   const [userState, setUserState] = useAtom(user);
   const [msg, setMsg] = useState("");
+  const [err, setErr] = useState("");
 
   const {
     register,
@@ -46,8 +47,6 @@ const CreateLog = () => {
               query: GET_CURRENT_USER_LOG,
             });
 
-            console.log("log data = ", logData);
-
             store.writeQuery({
               query: GET_CURRENT_USER_LOG,
               data: {
@@ -57,19 +56,14 @@ const CreateLog = () => {
                 ],
               },
             });
-
-            console.log("data = ", data);
+            setMsg("Log created successfully");
           } catch (err) {
+            setErr("Log not created successfully");
             console.log("err", err);
           }
         },
-        // refetchQueries: [
-        //   {
-        //     query: GET_CURRENT_USER_LOG,
-        //   },
-        // ],
       });
-      setMsg("Log created successfully");
+
       reset();
     } catch (err) {
       reset();
@@ -80,14 +74,13 @@ const CreateLog = () => {
   useEffect(() => {
     setTimeout(() => {
       setMsg("");
+      setErr("");
     }, 5000);
-  }, [msg]);
-
-  console.log("create error = ", createError);
+  }, [msg, err]);
 
   return (
     <div className="container">
-      <h2>Create Post</h2>
+      <h2>Create Log</h2>
 
       <form onSubmit={handleSubmit(onSubmit)} className="form--container">
         <input
@@ -114,6 +107,7 @@ const CreateLog = () => {
         )}
       </form>
       <div className="log__success">{msg}</div>
+      <div className="log__warning">{err}</div>
       {loading && <PulseLoader />}
     </div>
   );

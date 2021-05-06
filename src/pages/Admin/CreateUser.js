@@ -18,6 +18,7 @@ const schema = yup.object().shape({
 
 const CreateUser = () => {
   const [msg, setMsg] = useState("");
+  const [err, setErr] = useState("");
 
   const {
     register,
@@ -49,8 +50,6 @@ const CreateUser = () => {
               query: GET_USERS,
             });
 
-            console.log("user data = ", userData);
-
             store.writeQuery({
               query: GET_USERS,
               data: {
@@ -58,17 +57,11 @@ const CreateUser = () => {
               },
             });
 
-            console.log("data = ", data);
             setMsg("User created successfully");
           } catch (err) {
-            console.log("err", err);
+            setErr("User not updated successfully");
           }
         },
-        // refetchQueries: [
-        //   {
-        //     query: GET_USERS,
-        //   },
-        // ],
       });
       reset();
     } catch (err) {
@@ -80,10 +73,9 @@ const CreateUser = () => {
   useEffect(() => {
     setTimeout(() => {
       setMsg("");
+      setErr("");
     }, 5000);
-  }, [msg]);
-
-  console.log("create error = ", createError);
+  }, [msg, err]);
 
   return (
     <div className="container">
@@ -141,6 +133,7 @@ const CreateUser = () => {
         )}
       </form>
       <div className="log__success">{msg}</div>
+      <div className="log__warning">{err}</div>
       {loading && <PulseLoader />}
     </div>
   );
