@@ -17,7 +17,6 @@ const Logs = () => {
 
   const handleClick = (e, type) => {
     e.preventDefault();
-    console.log("type = ", type);
     if (type === "PREV") {
       setOffset(offset - 10);
     }
@@ -27,7 +26,7 @@ const Logs = () => {
     }
   };
 
-  const { data, loading, error } = useQuery(GET_CURRENT_USER_LOG, {});
+  const { data, loading, error } = useQuery(GET_CURRENT_USER_LOG);
 
   useEffect(() => {
     if (offset < 10) {
@@ -45,17 +44,11 @@ const Logs = () => {
     }
 
     if (data !== null && data !== undefined) {
-      if (data.getCurrentUserLogs.length < 10) {
+      if (data.getCurrentUserLogs.length - offset < 10) {
         setRight(true);
       }
     }
   }, [offset, data]);
-
-  console.log(offset);
-
-  // console.log("data = ", data);
-  // console.log("loading = ", loading);
-  // console.log("error = ", error);
 
   if (error) {
     return (
@@ -79,7 +72,9 @@ const Logs = () => {
           {data !== undefined ? (
             <>
               <p>Total Number of logs : {data.getCurrentUserLogs.length}</p>
-              <ShowLogs data={data.getCurrentUserLogs} />
+              <ShowLogs
+                data={data.getCurrentUserLogs.slice(offset, offset + 10)}
+              />
             </>
           ) : null}
 

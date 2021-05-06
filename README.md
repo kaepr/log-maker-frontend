@@ -8,5 +8,6 @@ Frontend code for log making application
 Made using react and apollo client
 Used jotai for state management
 
-yarn 
+yarn
+
 yarn start

@@ -13,7 +13,6 @@ const Admin = () => {
 
   const handleClick = (e, type) => {
     e.preventDefault();
-    console.log("type = ", type);
     if (type === "PREV") {
       setOffset(offset - 10);
     }
@@ -25,8 +24,8 @@ const Admin = () => {
 
   const { data, loading, error } = useQuery(GET_USERS, {
     variables: {
-      offset: offset,
-      limit: 10,
+      offset: 0,
+      limit: 0,
     },
   });
 
@@ -46,13 +45,11 @@ const Admin = () => {
     }
 
     if (data !== null && data !== undefined) {
-      if (data.getUsers.length < 10) {
+      if (data.getUsers.length - offset < 10) {
         setRight(true);
       }
     }
   }, [offset, data]);
-
-  console.log(offset);
 
   if (error) {
     return (
@@ -75,7 +72,7 @@ const Admin = () => {
           {data !== undefined ? (
             <>
               <p>Number of users on this page : {data.getUsers.length}</p>
-              <ShowUsers data={data.getUsers} />
+              <ShowUsers data={data.getUsers.slice(offset, offset + 10)} />
             </>
           ) : null}
           <div className="paginate">
@@ -87,7 +84,7 @@ const Admin = () => {
               {" "}
               Previous
             </button>
-            <p>{offset / 10 + 1}</p>
+            <p className="paginate--num">{offset / 10 + 1}</p>
             <button
               className="btn"
               onClick={(e) => handleClick(e, "NEXT")}

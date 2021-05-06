@@ -34,7 +34,6 @@ const CreateUser = () => {
   );
 
   const onSubmit = async (formData) => {
-    console.log("formData", formData);
     try {
       const res = await createUser({
         variables: {

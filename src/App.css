@@ -146,7 +146,13 @@ body {
   padding: 0.25em 1em;
 }
 
+.paginate--num {
+  padding: 1em;
+}
+
 .paginate p {
+  padding-right: 1em;
+  padding-left: 1em;
   margin: 0 0.35em;
 }
 
