@@ -44,28 +44,45 @@ const CreateUser = () => {
           role: formData.role,
           fullname: formData.fullname,
         },
-        update: (store, { data }) => {
-          try {
-            const userData = store.readQuery({
-              query: GET_USERS,
-            });
+        refetchQueries: [
+          {
+            query: GET_USERS,
+            variables: {
+              limit: 0,
+              offset: 0,
+            },
+          },
+        ],
+        // update: (store, { data }) => {
+        //   try {
+        //     const userData = store.readQuery({
+        //       query: GET_USERS,
+        //       variables: {
+        //         offset: 0,
+        //         limit: 0,
+        //       },
+        //     });
 
-            store.writeQuery({
-              query: GET_USERS,
-              data: {
-                getUsers: [data.register, ...userData.getUsers],
-              },
-            });
+        //     console.log("user data = ", userData);
 
-            setMsg("User created successfully");
-          } catch (err) {
-            setErr("User not updated successfully");
-          }
-        },
+        //     store.writeQuery({
+        //       query: GET_USERS,
+        //       data: {
+        //         getUsers: [data.register, ...userData.getUsers],
+        //       },
+        //     });
+
+        //     setMsg("User created successfully");
+        //   } catch (err) {
+        //     setErr("User not updated successfully");
+        //   }
+        // },
       });
+      setMsg("User created successfully");
       reset();
     } catch (err) {
       reset();
+      setErr("User not updated successfully");
       console.log(err);
     }
   };

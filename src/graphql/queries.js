@@ -24,8 +24,8 @@ export const GET_CURRENT_USER_LOG = gql`
 `;
 
 export const GET_USERS = gql`
-  query GET_USERS {
-    getUsers {
+  query GET_USERS($offset: Int, $limit: Int) {
+    getUsers(input: { offset: $offset, limit: $limit }) {
       id
       fullname
       role

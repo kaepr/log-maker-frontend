@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useQuery } from "@apollo/client";
 import { Link } from "react-router-dom";
 import { useAtom } from "jotai";
@@ -10,7 +10,48 @@ import { GET_CURRENT_USER_LOG } from "../../graphql/queries";
 
 const Logs = () => {
   const [userData] = useAtom(user);
-  const { data, loading, error } = useQuery(GET_CURRENT_USER_LOG);
+
+  const [offset, setOffset] = useState(0);
+  const [left, setLeft] = useState(true);
+  const [right, setRight] = useState(false);
+
+  const handleClick = (e, type) => {
+    e.preventDefault();
+    console.log("type = ", type);
+    if (type === "PREV") {
+      setOffset(offset - 10);
+    }
+
+    if (type === "NEXT") {
+      setOffset(offset + 10);
+    }
+  };
+
+  const { data, loading, error } = useQuery(GET_CURRENT_USER_LOG, {});
+
+  useEffect(() => {
+    if (offset < 10) {
+      setLeft(true);
+    }
+
+    if (offset >= 10) {
+      setLeft(false);
+    }
+
+    if (data !== null && data !== undefined) {
+      if (data.getCurrentUserLogs.length >= 10) {
+        setRight(false);
+      }
+    }
+
+    if (data !== null && data !== undefined) {
+      if (data.getCurrentUserLogs.length < 10) {
+        setRight(true);
+      }
+    }
+  }, [offset, data]);
+
+  console.log(offset);
 
   // console.log("data = ", data);
   // console.log("loading = ", loading);
@@ -41,6 +82,25 @@ const Logs = () => {
               <ShowLogs data={data.getCurrentUserLogs} />
             </>
           ) : null}
+
+          <div className="paginate">
+            <button
+              className="btn"
+              onClick={(e) => handleClick(e, "PREV")}
+              disabled={left}
+            >
+              {" "}
+              Previous
+            </button>
+            <p>{offset / 10 + 1}</p>
+            <button
+              className="btn"
+              onClick={(e) => handleClick(e, "NEXT")}
+              disabled={right}
+            >
+              NEXT{" "}
+            </button>
+          </div>
         </>
       )}
     </div>

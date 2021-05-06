@@ -129,6 +129,36 @@ body {
   transform: scale(1.05);
 }
 
+.paginate {
+  display: flex;
+  margin-bottom: 4em;
+}
+
+.paginate p,
+.paginate .btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: whitesmoke;
+  border: 3px black solid;
+  color: var(--dark-grey);
+  font-weight: 700;
+  padding: 0.25em 1em;
+}
+
+.paginate p {
+  margin: 0 0.35em;
+}
+
+.paginate .btn {
+  cursor: pointer;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: pointer;
+}
+
 /* USER */
 .user--container {
   margin-top: 0.75em;

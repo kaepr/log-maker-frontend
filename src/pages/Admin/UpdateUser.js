@@ -51,35 +51,48 @@ const UpdateUser = (data) => {
           role: formData.role,
           fullname: formData.fullname,
         },
-        update: (store, { data }) => {
-          try {
-            const userData = store.readQuery({
-              query: GET_USERS,
-            });
+        refetchQueries: [
+          {
+            query: GET_USERS,
+            variables: {
+              limit: 0,
+              offset: 0,
+            },
+          },
+        ],
+        // update: (store, { data }) => {
+        //   try {
+        //     const userData = store.readQuery({
+        //       query: GET_USERS,
+        //     });
 
-            const index = userData.getUsers.findIndex(
-              (elm) => elm.id === data.updateUser.id
-            );
+        //     console.log("user data ", userData);
 
-            let tempArr = [...userData.getUsers];
-            tempArr[index] = data.updateUser;
+        //     const index = userData.getUsers.findIndex(
+        //       (elm) => elm.id === data.updateUser.id
+        //     );
 
-            store.writeQuery({
-              query: GET_USERS,
-              data: {
-                getUsers: tempArr,
-              },
-            });
+        //     let tempArr = [...userData.getUsers];
+        //     tempArr[index] = data.updateUser;
 
-            setMsg("User updated successfully");
-          } catch (err) {
-            console.log("err", err);
-            setErr("User not updated successfully");
-          }
-        },
+        //     store.writeQuery({
+        //       query: GET_USERS,
+        //       data: {
+        //         getUsers: tempArr,
+        //       },
+        //     });
+
+        //     setMsg("User updated successfully");
+        //   } catch (err) {
+        //     console.log("err", err);
+        //     setErr("User not updated successfully");
+        //   }
+        // },
       });
+      setMsg("User updated successfully");
     } catch (err) {
       reset();
+      setErr("User not updated successfully");
       console.log(err);
     }
   };

@@ -1,8 +1,10 @@
+import { useApolloClient } from "@apollo/client";
 import { Link, Redirect } from "react-router-dom";
 import { useAtom } from "jotai";
 import { user } from "../../store/store";
 
 const Navbar = (props) => {
+  const client = useApolloClient();
   const [userData, setUserData] = useAtom(user);
 
   let isLogged = false;
@@ -18,6 +20,7 @@ const Navbar = (props) => {
     try {
       setUserData(null);
       localStorage.removeItem("token");
+      client.clearStore();
       // props.history.push("/");
       return <Redirect to="/" />;
     } catch (err) {
