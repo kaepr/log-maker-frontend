@@ -26,8 +26,6 @@ const ShowUsers = ({ data }) => {
     return <div>No Users</div>;
   }
 
-  console.log("data = ", data);
-
   return (
     <div className="user--container">
       <div></div>

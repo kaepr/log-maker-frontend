@@ -75,7 +75,7 @@ const CreateLog = () => {
     setTimeout(() => {
       setMsg("");
       setErr("");
-    }, 5000);
+    }, 3000);
   }, [msg, err]);
 
   return (

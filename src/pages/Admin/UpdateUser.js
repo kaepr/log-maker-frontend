@@ -88,7 +88,7 @@ const UpdateUser = (data) => {
     setTimeout(() => {
       setMsg("");
       setErr("");
-    }, 5000);
+    }, 3000);
   }, [msg, err]);
 
   return (
