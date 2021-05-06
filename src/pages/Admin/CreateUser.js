@@ -4,22 +4,19 @@ import { useMutation } from "@apollo/client";
 import PulseLoader from "react-spinners/PulseLoader";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { useAtom } from "jotai";
 
-import { user } from "../../store/store";
 import { GET_USERS } from "../../graphql/queries";
 import { CREATE_USER } from "../../graphql/mutations";
 
 const schema = yup.object().shape({
   email: yup.string().email().min(3).max(255),
-  password: yup.string().min(3).max(255),
+  password: yup.string().min(6).max(255),
   confirmpassword: yup.string().min(3).max(255),
   fullname: yup.string().min(3).max(255),
   role: yup.string(),
 });
 
-const CreateLog = () => {
-  const [userState, setUserState] = useAtom(user);
+const CreateUser = () => {
   const [msg, setMsg] = useState("");
 
   const {
@@ -31,15 +28,14 @@ const CreateLog = () => {
     resolver: yupResolver(schema),
   });
 
-  const [
-    createLog,
-    { data: createData, loading, error: createError },
-  ] = useMutation(CREATE_USER);
+  const [createUser, { data, loading, error: createError }] = useMutation(
+    CREATE_USER
+  );
 
   const onSubmit = async (formData) => {
     console.log("formData", formData);
     try {
-      const res = await createLog({
+      const res = await createUser({
         variables: {
           email: formData.email,
           password: formData.password,
@@ -63,6 +59,7 @@ const CreateLog = () => {
             });
 
             console.log("data = ", data);
+            setMsg("User created successfully");
           } catch (err) {
             console.log("err", err);
           }
@@ -73,7 +70,6 @@ const CreateLog = () => {
         //   },
         // ],
       });
-      setMsg("User created successfully");
       reset();
     } catch (err) {
       reset();
@@ -128,9 +124,13 @@ const CreateLog = () => {
           {errors.confirmpassword?.message}
         </div>
 
-        <select {...register("role")}>
-          <option value="USER">User</option>
-          <option value="ADMIN">Admin</option>
+        <select {...register("role")} className="form--select">
+          <option value="USER" className="form--option">
+            User
+          </option>
+          <option value="ADMIN" className="form--option">
+            Admin
+          </option>
         </select>
 
         <button type="submit" disabled={loading} className="form--submit">
@@ -146,4 +146,4 @@ const CreateLog = () => {
   );
 };
 
-export default CreateLog;
+export default CreateUser;

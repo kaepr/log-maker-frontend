@@ -9,6 +9,8 @@ import Logs from "./pages/Logs/Logs";
 import Admin from "./pages/Admin/Admin";
 import Login from "./pages/Login/Login";
 import CreateLog from "./pages/Logs/CreateLog";
+import CreateUser from "./pages/Admin/CreateUser";
+import UpdateUser from "./pages/Admin/UpdateUser";
 
 import UserRoute from "./components/Routes/UserRoute";
 import AdminRoute from "./components/Routes/AdminRoute";
@@ -29,11 +31,6 @@ function App() {
     }
   }, [data]);
 
-  // console.log("data = ", data);
-  // console.log("userData = ", userData);
-  // console.log("loading = ", loading);
-  // console.log("error = ", error);
-
   return (
     <Router>
       <Navbar />
@@ -43,6 +40,8 @@ function App() {
         <UserRoute exact path="/logs" component={Logs} />
         <UserRoute exact path="/createlog" component={CreateLog} />
         <AdminRoute exact path="/admin" component={Admin} />
+        <AdminRoute exact path="/createuser" component={CreateUser} />
+        <AdminRoute exact path="/updateuser" component={UpdateUser} />
       </Switch>
     </Router>
   );

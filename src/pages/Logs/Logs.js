@@ -12,9 +12,9 @@ const Logs = () => {
   const [userData] = useAtom(user);
   const { data, loading, error } = useQuery(GET_CURRENT_USER_LOG);
 
-  console.log("data = ", data);
-  console.log("loading = ", loading);
-  console.log("error = ", error);
+  // console.log("data = ", data);
+  // console.log("loading = ", loading);
+  // console.log("error = ", error);
 
   if (error) {
     return (
@@ -37,7 +37,7 @@ const Logs = () => {
           <p>Logs created by : {userData.fullname}</p>
           {data !== undefined ? (
             <>
-              <p>Total Number of posts : {data.getCurrentUserLogs.length}</p>
+              <p>Total Number of logs : {data.getCurrentUserLogs.length}</p>
               <ShowLogs data={data.getCurrentUserLogs} />
             </>
           ) : null}
